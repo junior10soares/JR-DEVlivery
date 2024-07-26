@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+  <img alt="versão do React" src="https://img.shields.io/badge/React-v_0.69.5-61dafb?logo=react">
 
-First, run the development server:
+  <img alt="contagem de linguagens no GitHub" src="https://img.shields.io/github/languages/count/Fred-Reis/seriesList">
 
+  <img alt="linguagem principal no GitHub" src="https://img.shields.io/github/languages/top/Fred-Reis/seriesList">
+
+  <img alt="tamanho do repositório no GitHub em bytes" src="https://img.shields.io/github/repo-size/Fred-Reis/seriesList">
+
+</div>
+
+<hr/>
+
+<br/>
+
+<div align="center">
+
+  <a href="#-sobre-este-projeto">Sobre este projeto</a>&nbsp;&nbsp;-&nbsp;
+  <a href="#-demo">Demonstração</a>&nbsp;&nbsp;-&nbsp;
+  <a href="#-tecnologias-e-bibliotecas">Tecnologias e Bibliotecas</a>&nbsp;&nbsp;-&nbsp;
+  <a href="#-executando-o-projeto">Executando o Projeto</a>
+
+</div>
+
+<br/>
+
+# 💡 Sobre este projeto
+Este projeto é uma clonagem de plataformas de e-commerce focadas na compra de bebidas, desenvolvido com Next.js para renderização eficiente e otimização de SEO, Tailwind CSS para estilização responsiva e moderna, e a API da Stripe para processamento seguro de pagamentos.
+
+Este projeto foi construído utilizando [**Next.js**](https://nextjs.org/docs). e [**Typescript**](https://www.typescriptlang.org/).
+
+<br/>
+
+## 🔥 Funcionalidades
+
+- Catálogo de Bebidas: Visualização de produtos com filtros.
+- Página de Detalhes do Produto: Informações completas e opções para comprar.
+- Checkout e Pagamento: Integração com Stripe para transações seguras.
+
+<br/>
+
+## 👀 Demonstração
+
+## Versão web
+<div align="center">
+  <img src="https://github.com/junior10soares/JR-DEVlivery/blob/master/src/assets/web.png" alt="Captura de tela de 2024-04-18 00-39-47" width="800" height='400'/>
+</div>
+
+## Versão mobile
+<div align="center">
+<img src="https://github.com/junior10soares/JR-DEVlivery/blob/master/src/assets/mobile.png" alt="Captura de tela de 2024-04-18 00-40-22" height='400'/>
+</div>
+<br/>
+
+
+<br/>
+
+## 🛠 Tecnologias e Bibliotecas
+
+Algumas das tecnologias e bibliotecas utilizadas neste projeto:
+
+- [**Typescript**](https://www.typescriptlang.org/);
+- [**Next.js**](https://www.typescriptlang.org/); => Framework React para renderização do lado do servidor e geração de sites estáticos. Utiliza as funções getStaticProps e getServerSideProps para otimizar a carga de dados e o desempenho.
+- [**Tailwindcss**](https://v2.tailwindcss.com/docs) => Framework de CSS utilitário para criar uma interface estilizada e responsiva com classes pré-definidas.
+- [**Stripe**](https://stripe.com/br?utm_campaign=AMER_BR_en_Google_Search_Brand_Brand_EXA-15088005049&utm_medium=cpc&utm_source=google&ad_content=603963803239&utm_term=stripe&utm_matchtype=e&utm_adposition=&utm_device=c&gad_source=1&gclid=CjwKCAjwko21BhAPEiwAwfaQCEJZyr0eot1PLKvdWM6cp3swdfwBKgQI0wu2bN-j4fe6h4ijFxLFdhoCRs8QAvD_BwE) => Integração para processar pagamentos de forma segura e eficiente.
+- [**Axios**](https://axios-http.com/docs/intro) 
+
+<br/>
+
+## 🏁 Executando o Projeto
+
+1 - Para executar o projeto pela primeira vez, é necessário criar uma pasta
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+mkdir <nome-da-pasta>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2 - Agora, dentro da pasta
+```bash
+cd <nome-da-pasta>
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3 - Vamos clonar o repositório
+```bash
+git clone https://github.com/junior10soares/JR-DEVlivery
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4 - Execute o seguinte comando para criar a pasta node_modules
+```bash
+npm install
+```
+5 - Agora, para executar este projeto no emulador ou dispositivo em modo de desenvolvimento, execute este comando usando sua plataforma.
+```bash
+npm run dev
+```
 
-## Learn More
+<br/>
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<h3 align="center">
+Author: <a alt="Junior Soares" href="https://github.com/junior10soares">Junior Soares</a>
+</h3>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<p align="center">
 
-## Deploy on Vercel
+  <a alt="Junior Soares" href="https://www.linkedin.com/in/edsonjr-dev/">
+    <img src="https://img.shields.io/badge/LinkedIn-Edson_JR-0077B5?logo=linkedin"/></a>
+  <a alt="Junior Soares" href="https://github.com/junior10soares">
+  <img src="https://img.shields.io/badge/JR_Soares-GitHub-000?logo=github"/></a>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+</p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  <br/>
+<p align="center">Feito com ♥️ 2024</p>
+</h3>
+
+
+
