@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "axios": "^1.7.2",
+    "@material-tailwind/react": "^2.1.10",
+    "axios": "^1.7.7",
     "keen-slider": "^6.8.6",
-    "next": "14.2.5",
+    "lucide-react": "^0.446.0",
+    "next": "^14.2.13",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
     "stripe": "^16.4.0"
   },
@@ -23,6 +26,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-slick": "^0.23.13",
+    "@types/swiper": "^6.0.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",

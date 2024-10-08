@@ -1,31 +1,82 @@
-import { useEffect } from 'react';
-
-import { useRouter } from 'next/router';
-import Image from 'next/image';
 import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { GetStaticProps } from 'next';
 
-import logo from '../assets/logo.gif';
-import styles from '../styles/animation.module.css';
+import Insert from '@/components/Insert';
+import { axiosBase } from '@/lib/axios';
 
-export default function Home() {
-    const router = useRouter();
+interface Product {
+    id: number;
+    images: string;
+    title: string;
+    description: string;
+    price: number;
+}
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            router.push('/dashboard');
-        }, 3000);
+interface HomeProps {
+    products: Product[];
+}
 
-        return () => clearTimeout(timeout)
-    }, []);
-
+export default function Home({ products }: HomeProps) {
     return (
-        <>
+        <div className='w-full'>
             <Head>
-                <title>JR DEVlivery</title>
+                <title>E-Commerce | Home</title>
             </Head>
-            <div className="bg-custom-yellow h-screen flex flex-col items-center justify-center">
-                <Image className={`${styles['slide-in-left']}`} width={450} alt='logo' src={logo} />
+
+            <Insert />
+
+            <strong className='text-3xl font-bold my-16 block'>Explore our latest drops</strong>
+
+            <div className='flex flex-col gap-6 lg:grid grid-cols-4 my-6 lg:gap-24'>
+                {products.map(product => (
+                    <Link key={product.id} href={`/product/${product.id}`}>
+                        <div className='bg-slate-100 hover:bg-white p-8 rounded-2xl w-full mb-2'>
+                            <Image
+                                alt={product.title}
+                                src={product.images[0]}
+                                width={100}
+                                height={150}
+                                className='w-full h-auto'
+                            />
+                            <strong>{product.title}</strong>
+                            <p className='truncate mt-1'>{product.description}</p>
+                            <span className='font-bold mt-1 block'>${product.price.toFixed(2)}</span>
+                        </div>
+                    </Link>
+                ))}
             </div>
-        </>
+        </div>
     );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+    try {
+        const response = await axiosBase.get<{ products: Product[] }>('/products');
+
+        const products: Product[] = response.data.products
+            .slice(0, 4)
+            .map(product => ({
+                id: product.id,
+                images: product.images || '',
+                title: product.title,
+                description: product.description,
+                price: product.price,
+            }));
+
+        return {
+            props: {
+                products,
+            },
+            revalidate: 60 * 60 * 1,
+        };
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        return {
+            props: {
+                products: [],
+            },
+        };
+    }
+};
