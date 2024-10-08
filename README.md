@@ -26,35 +26,12 @@
 <br/>
 
 # 💡 Sobre este projeto
-Este projeto é uma clonagem de plataformas de e-commerce focadas na compra de bebidas, desenvolvido com Next.js para renderização eficiente e otimização de SEO, Tailwind CSS para estilização responsiva e moderna, e a API da Stripe para processamento seguro de pagamentos.
+Este projeto é uma clonagem de plataformas de e-commerce, desenvolvido com Next.js para renderização eficiente e otimização de SEO, Tailwind CSS para estilização responsiva e moderna, e a API da Stripe para processamento seguro de pagamentos.
 
 Este projeto foi construído utilizando [**Next.js**](https://nextjs.org/docs). e [**Typescript**](https://www.typescriptlang.org/).
 
 <br/>
 
-## 🔥 Funcionalidades
-
-- Catálogo de Bebidas: Visualização de produtos com filtros.
-- Página de Detalhes do Produto: Informações completas e opções para comprar.
-- Checkout e Pagamento: Integração com Stripe para transações seguras.
-
-<br/>
-
-## 👀 Demonstração
-
-## Versão web
-<div align="center">
-  <img src="https://github.com/junior10soares/JR-DEVlivery/blob/master/src/assets/web.png" alt="Captura de tela de 2024-04-18 00-39-47" width="800" height='400'/>
-</div>
-
-## Versão mobile
-<div align="center">
-<img src="https://github.com/junior10soares/JR-DEVlivery/blob/master/src/assets/mobile.png" alt="Captura de tela de 2024-04-18 00-40-22" height='400'/>
-</div>
-<br/>
-
-
-<br/>
 
 ## 🛠 Tecnologias e Bibliotecas
 
@@ -65,6 +42,7 @@ Algumas das tecnologias e bibliotecas utilizadas neste projeto:
 - [**Tailwindcss**](https://v2.tailwindcss.com/docs) => Framework de CSS utilitário para criar uma interface estilizada e responsiva com classes pré-definidas.
 - [**Stripe**](https://stripe.com/br?utm_campaign=AMER_BR_en_Google_Search_Brand_Brand_EXA-15088005049&utm_medium=cpc&utm_source=google&ad_content=603963803239&utm_term=stripe&utm_matchtype=e&utm_adposition=&utm_device=c&gad_source=1&gclid=CjwKCAjwko21BhAPEiwAwfaQCEJZyr0eot1PLKvdWM6cp3swdfwBKgQI0wu2bN-j4fe6h4ijFxLFdhoCRs8QAvD_BwE) => Integração para processar pagamentos de forma segura e eficiente.
 - [**Axios**](https://axios-http.com/docs/intro) 
+ [**LocalStorage**](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) 
 
 <br/>
 
