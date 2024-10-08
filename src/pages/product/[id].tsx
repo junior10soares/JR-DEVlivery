@@ -1,98 +1,116 @@
-import Head from 'next/head';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { Header } from "@/components/Header";
+import { stripe } from "@/lib/stripe";
 
-import { ButtonAddCart } from '@/components/ButtonAddCart';
-import { Quanity } from '@/components/Quanity';
-import { Carroulsel } from '@/components/Carrousel';
-import { axiosBase } from '@/lib/axios';
-export interface Product {
-    id: number;
-    images: string[];
-    title: string;
-    description: string;
-    price: number;
-}
+import axios from "axios";
+import { useState } from "react";
+import Stripe from "stripe";
 
-export interface ProductProps {
-    product: Product | null;
+import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
+import Image from "next/image";
+
+interface ProductProps {
+    product: {
+        id: string
+        name: string
+        imageUrl: string
+        price: string
+        description: string
+        defaultPriceId: string
+    }
 }
 
 export default function Product({ product }: ProductProps) {
+    const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
 
-    const addToCart = () => {
-        const cartString = localStorage.getItem('cart');
-        const cart = cartString ? JSON.parse(cartString) : [];
+    async function handleBuyButton() {
+        try {
+            setIsCreatingCheckoutSession(true);
 
-        const existingProductIndex = cart.findIndex((item: { id: number | undefined; }) => item.id === product?.id);
+            const response = await axios.post('/api/checkout', {
+                priceId: product.defaultPriceId,
+            })
+            const { checkoutUrl } = response.data;
 
-        if (existingProductIndex !== -1) {
-            cart[existingProductIndex].quantity += 1;
-        } else {
-            cart.push({ ...product, quantity: 7 });
+            window.location.href = checkoutUrl;
+
+        } catch (err) {
+            setIsCreatingCheckoutSession(false);
+            alert('Falha ao redirecionar ao checkout!')
         }
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-        window.dispatchEvent(new Event('storage'));
-    };
+    }
 
     return (
         <>
             <Head>
-                <title>E-Commerce | Product</title>
+                <title>{product.name} | JR DEVlivery</title>
             </Head>
 
-            <div className='flex flex-col gap-10 lg:flex-row lg:col-span-2 justify-between my-20'>
-                <Carroulsel product={product} />
+            <Header />
 
-                <div className='border p-9 border-black rounded-3xl w-[800px] h-[448px]'>
-                    <strong className='text-2xl'>{product?.title}</strong>
-                    <p className='text-2xl text-gray-400 font-bold mt-4 truncate'>{product?.description}</p>
-                    <strong className='text-2xl mt-4 block border-b pb-10'>{`$${product?.price.toFixed(2)}`}</strong>
-                    <p className='mt-6 font-bold mb-6'>Quantity</p>
-                    <Quanity />
-                    <ButtonAddCart onClick={addToCart} title='Add cart' />
+            <div className="grid grid-cols-2 mt-28">
+                <div>
+                    <Image src={product.imageUrl} width={520} height={480} alt="" />
+                </div>
+
+                <div className="flex flex-col p-10">
+                    <strong className="text-4xl">{product.name}</strong>
+                    <p className="text-xl mt-10 hidden md:flex">{product.description}</p>
+                    <span className="text-3xl mt-10">{product.price}</span>
+                    <button
+                        className="bg-custom-yellow hover:bg-yellow-400 text-white mt-10 md:mt-auto h-12 w-full rounded-md"
+                        disabled={isCreatingCheckoutSession}
+                        onClick={handleBuyButton}
+                    >
+                        Comprar agora
+                    </button>
                 </div>
             </div>
         </>
-    );
+    )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    //pega o id do params
-    const response = await axiosBase.get('/products');
-    const products = response.data.products;
+    return {
+        paths: [
+            {
+                params: { id: 'prod_MLH5Wy0Y97hDAC' }
+            }
+        ],
+        fallback: 'blocking',
+    }
+}
 
-    const paths = products.map((product: Product) => ({
-        params: { id: product.id.toString() },
-    }));
-
-    return { paths, fallback: 'blocking' };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ params }) => {
     if (!params || !params.id) {
         return {
             notFound: true,
         };
     }
 
-    try {
-        //pega o params do getStaticPaths a cima
-        const response = await axiosBase.get(`/products/${params.id}`);
-        const product: Product = response.data;
+    const productId = params.id;
 
-        return {
-            props: {
-                product,
-            },
-            revalidate: 60 * 60 * 1,
-        };
-    } catch (error) {
-        console.error('Error fetching product:', error);
-        return {
-            props: {
-                product: null,
-            },
-        };
+    const product = await stripe.products.retrieve(productId, {
+        expand: ['default_price']
+    });
+
+    const price = product.default_price as Stripe.Price;
+    const productPrice = price.unit_amount !== null ? price.unit_amount / 100 : 0;
+
+    return {
+        props: {
+            product: {
+                id: product.id,
+                name: product.name,
+                imageUrl: product.images[0],
+                price: new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }).format(productPrice * 1),
+                description: product.description,
+                defaultPriceId: price.id
+            }
+        },
+        revalidate: 60 * 60 * 1
     }
-};
+}
